@@ -7,24 +7,29 @@ const navNextButton = document.querySelector('[data-slide="nav-next-button"]');
 const controlsWrapper = document.querySelector('[data-slide="controls-wrapper"]');
 const slideItems = document.querySelectorAll('[data-slide="item"]');
 const controlsButtons = document.querySelectorAll('[data-slide="control-button"]');
-
+let startPoint = 0;
+let savedPosition = 0;
+let currentPoint = 0;
 
 function onMouseDown(event) {
   const slideItem = event.currentTarget;
-  console.log(event.clientX)
-  console.log('apertei o botao do mouse')
+  startPoint = event.clientX;
+  currentPoint = startPoint - savedPosition;
+  console.log('ponto de partida', startPoint)
   slideItem.addEventListener('mousemove', onMouseMove);
 }
 
 function onMouseMove(event) { 
-  const slideItem = event.currentTarget;
-  console.log('movimentei o mouse em cima do elemento')
+  const movement = event.clientX - startPoint;
+  const position = event.clientX - currentPoint;
+  console.log('pixel do mousemove', event.clientX, '-', 'ponto de partida', startPoint, '=', movement)
+  slideList.style.transform = 'translateX('+position+'px)'
+  savedPosition = position;
 }
 
 function onMouseUp(event) {
   const slideItem = event.currentTarget;
   slideItem.removeEventListener('mousemove', onMouseMove);
-    console.log('soltei o botao do mouse')
 }
 
 slideItems.forEach((slideItem, index) => {
