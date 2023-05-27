@@ -51,6 +51,7 @@ body {
 }
 
 .slide-description {
+  user-select: none;
   background: linear-gradient(to top, #000, transparent);
   color: #fff;
   position: absolute;
